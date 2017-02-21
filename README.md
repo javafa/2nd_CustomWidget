@@ -1,9 +1,21 @@
 # Custom Widget
 안드로이드 위젯을 재정의하는 방법을 알아봅니다
 
+
+
+### 1. 신규 속성을 attrs.xml에 정의
+```xml
+    <declare-styleable name="Today">
+        <attr name="delimeter" format="string" />
+    </declare-styleable>
+```
+
+### 2. 커스텀할 위젯을 상속받은 후 재 정의
 ```java
-//
 public class Today extends TextView {
+    /**
+    * attrs : 레이아웃 xml 파일에 정의된 속성의 이름과 값이 배열로 저장
+    */
     public Today(Context context, AttributeSet attrs) {
         super(context, attrs);
         // # 커스텀 위젯에 커스텀 속성 사용하기
@@ -27,4 +39,16 @@ public class Today extends TextView {
         }
     }
 }
+```
+
+### 3. 레이아웃에서 사용
+```xml
+    <!-- xmlns:custom="커스텀 스키마 적용" -->
+    <!-- custom:newAttribute="value" -->
+    <package.Today
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:delimeter=":::"
+        android:text="aaa" />
 ```
